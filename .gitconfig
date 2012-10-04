@@ -1,0 +1,19 @@
+[alias]
+	br = branch
+	ci = commit
+	co = checkout
+	di = diff
+	st = status
+	tree = log --graph --decorate --oneline --all
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[core]
+	editor = gvim
+[merge]
+	tool = meld
+[user]
+	name = Jochen Kupperschmidt
+	email = yogi@local
