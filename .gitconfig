@@ -1,8 +1,13 @@
 [alias]
 	br = branch
 	ci = commit
+	cm = commit -m
 	co = checkout
 	di = diff
+	dit = difftool
+	dc = diff --cached
+	dct = difftool --cached
+	pr = pull --rebase
 	st = status
 	tree = log --graph --decorate --oneline --all
 [color]
@@ -12,8 +17,12 @@
 	status = auto
 [core]
 	editor = gvim
+[diff]
+	tool = meld
+[difftool]
+    prompt = false
 [merge]
 	tool = meld
 [user]
 	name = Jochen Kupperschmidt
-	email = yogi@local
+	email = jk@local
