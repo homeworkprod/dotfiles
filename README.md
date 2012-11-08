@@ -1,4 +1,8 @@
 dotfiles
 ========
 
-Linux user configuration files
+- /etc
+  system-wide configuration files
+
+- /home
+  personalized user configuration files and scripts
