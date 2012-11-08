@@ -1,0 +1,95 @@
+desktop applications:
+- icedove
+- icedove-l10n-de
+- iceweasel
+- iceweasel-l10n-de
+- iceweasel-vimperator
+- xul-ext-adblock-plus
+- xul-ext-compactheader
+- xul-ext-firebug
+- xul-ext-livehttpheaders
+- xul-ext-noscript
+
+development:
+- ack-grep
+- bpython
+- git
+- meld
+- vim
+- vim-addon-manager
+- vim-gtk
+- vim-scripts
+
+graphical desktop:
+- lxappearance
+- lxrandr
+- rxvt-unicode-lite
+- suckless-tools
+- tangerine-icon-theme
+- xmobar
+- xmonad
+- xserver-xorg
+- zenity
+
+GUI tools:
+- pcmanfm
+- scite
+- xarchiver
+
+multimedia:
+- audio:
+  - abcde
+  - alsa-utils
+  - cmus
+  - flac
+  - puddletag
+  - vorbis-tools
+  - wodim
+- graphics:
+  - feh
+  - gimp
+  - inkscape
+- video:
+  - mplayer2
+
+network:
+- curl
+- irssi
+- irssi-plugin-xmpp
+- irssi-scripts
+- netcat
+- netcat-traditional
+- rtorrent
+- wget
+- wireless:
+  - wicd
+  - wicd-curses
+  - wicd-daemon
+  - wireless-tools
+
+office:
+- libreoffice
+- pdf:
+  - apvlv
+  - epdfview
+  - zathura
+
+shell:
+- most
+- screen
+- vfu
+- zsh
+
+sysadmin:
+- discus
+- htop
+- iotop
+- lsof
+- pwgen
+- sysv-rc-conf
+
+tools:
+- file
+- ntfs-3g
+- p7zip-full
+- pmount
