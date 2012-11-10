@@ -85,6 +85,7 @@ sysadmin:
 - htop
 - iotop
 - lsof
+- nmon
 - pwgen
 - sysv-rc-conf
 
