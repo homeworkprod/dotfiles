@@ -1,2 +1,1 @@
 alias geh-aus='su -c halt'
-alias grepp='grep -in --color=auto'
