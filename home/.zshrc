@@ -1,7 +1,12 @@
 # Set up the prompt
 autoload -Uz promptinit
 promptinit
-prompt walters
+if [[ "$TERM" != "dumb" ]]; then
+    export PROMPT='%T %B%(?..[%?] )%b<%F{cyan}%n%f> $ '
+    export RPROMPT="%F{green}%~%f"
+else
+    export PROMPT="%T %(?..[%?] )<%n> %~ $ "
+fi
 
 setopt histignorealldups sharehistory
 
