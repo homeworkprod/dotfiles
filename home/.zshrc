@@ -2,10 +2,10 @@
 autoload -Uz promptinit
 promptinit
 if [[ "$TERM" != "dumb" ]]; then
-    export PROMPT='%T %B%(?..[%?] )%b<%F{cyan}%n%f> $ '
+    export PROMPT='%D{%H:%M:%S} %B%(?..[%?] )%b<%F{cyan}%n%f> $ '
     export RPROMPT="%F{green}%~%f"
 else
-    export PROMPT="%T %(?..[%?] )<%n> %~ $ "
+    export PROMPT="%D{%H:%M:%S} %(?..[%?] )<%n> %~ $ "
 fi
 
 setopt histignorealldups sharehistory
