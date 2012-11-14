@@ -2,7 +2,8 @@
 autoload -Uz promptinit
 promptinit
 if [[ "$TERM" != "dumb" ]]; then
-    export PROMPT='%D{%H:%M:%S} %B%(?..[%?] )%b<%F{cyan}%n%f> $ '
+    # time with seconds; optional yellow, bold return code; cyan user name
+    export PROMPT='%D{%H:%M:%S} %B%F{yellow}%(?..[%?] )%f%b<%F{cyan}%n%f> $ '
     export RPROMPT="%F{green}%~%f"
 else
     export PROMPT="%D{%H:%M:%S} %(?..[%?] )<%n> %~ $ "
