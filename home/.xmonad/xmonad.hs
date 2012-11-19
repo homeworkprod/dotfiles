@@ -12,6 +12,9 @@ import XMonad.Hooks.DynamicLog (defaultPP, dynamicLogWithPP, ppCurrent,
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
+import XMonad.Layout.MultiToggle ((??), EOT (..), mkToggle, Toggle (..))
+import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL))
+import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.ThreeColumns
@@ -26,40 +29,19 @@ myStartupHook = setWMName "LG3D" -- Deal with Java apps.
 myTerminal = "urxvt"
 
 ------------------------------------------------------------------------
--- workspaces
-
-determineWorkspaceName :: String -> Map.Map String String -> String
-determineWorkspaceName k map = case Map.lookup k map of
-    Nothing -> k
-    --Just v -> k ++ ":" ++ v
-    Just v -> v
-
-workspaceNumbers = map show [1..9]
-workspaceNameSuffixes = Map.fromList [
-    ("1", "web"),
-    ("5", "mail")
-    ]
---myWorkspaces = map (\x -> determineWorkspaceName x workspaceNameSuffixes) workspaceNumbers
---myWorkspaces = ["web"] ++ map show [2..9] ++ ["mail", "gimp", "im", "inkscape", "music", "office"]
-myWorkspaces = ["web"] ++ map show [2..4] ++ ["mail"] ++ map show [6..9] ++ ["♫"]
-
---
--- /workspaces
-
-------------------------------------------------------------------------
 -- key bindings
 
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = Map.fromList $ [
 
     -- Call external programs.
-    ((modMask              , xK_e     ), safeSpawn "/usr/bin/pcmanfm" []),       -- Launch file manager.
-    --((modMask .|. shiftMask, xK_l     ), spawn "/usr/bin/slock"),         -- Lock the screen.
+    ((modMask              , xK_e     ), safeSpawn "/usr/bin/pcmanfm" []),  -- Launch file manager.
     ((modMask .|. shiftMask, xK_l     ), unsafeSpawn "zenity --question --text 'Bildschirm sperren?' && slock"),  -- Lock screen after asking.
     ((modMask              , xK_p     ), spawnHere "exe=`dmenu_path | dmenu -b -nb \"#000000\" -nf \"#dddddd\" -sb \"#ff8800\" -sf \"#000000\"` && eval \"exec $exe\""),  -- Launch dmenu.
     ((modMask              , xK_w     ), unsafeSpawn "~/bin/set_random_wallpaper.sh"),  -- Set random wallpaper.
-    ((modMask              , xK_Return), spawn $ XMonad.terminal conf),   -- Launch terminal.
+    ((modMask              , xK_Return), spawn $ XMonad.terminal conf),  -- Launch terminal.
 
     -- Control layout.
+    ((modMask              , xK_f     ), sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts),  -- Toggle fullscreen mode.
     ((modMask              , xK_h     ), sendMessage Shrink),  -- Shrink master area.
     ((modMask              , xK_l     ), sendMessage Expand),  -- Expand master area.
     ((modMask              , xK_space ), sendMessage NextLayout),  -- Rotate through available algorithms.
@@ -101,18 +83,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = Map.fromList $ [
     --((modMask              , xK_Up    ), spawn "~/bin/set_amixer_volume.sh 2+ | ~/bin/display_volume_bar.sh"),  -- Increase volume.
     --((modMask              , xK_Down  ), spawn "~/bin/set_amixer_volume.sh 2- | ~/bin/display_volume_bar.sh")  -- Decrease volume.
 
-    -- toggle the status bar gap
-    -- TODO, update this binding with avoidStruts , ((modMask              , xK_b     ),
-
     ((modMask              , xK_q     ), restart "xmonad" True),     -- Restart xmonad.
     ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))  -- Quit xmonad.
+
     ]
+
     ++
 
-    --
-    -- mod-[1..9], Switch to workspace N
-    -- mod-shift-[1..9], Move client to workspace N
-    --
+    -- mod-[1..9], Switch to workspace N.
+    -- mod-shift-[1..9], Move client to workspace N.
     [((m .|. modMask, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
@@ -129,7 +108,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = Map.fromList $ [
 
 defaultTiled = ResizableTall 1 (3/100) (11/16) []
 
-myLayoutHook = avoidStruts $ (ResizableTall 1 (3/100) (9/16) []) ||| Mirror defaultTiled ||| Full
+myLayoutHook
+    = smartBorders
+    $ avoidStruts
+    $ mkToggle (NBFULL ?? EOT)
+    $ (ResizableTall 1 (3/100) (9/16) []) ||| Mirror defaultTiled ||| Full
 
 myLogHook xmproc = dynamicLogWithPP $ xmobarPP {
     ppCurrent = xmobarColor "green" "",
@@ -159,6 +142,27 @@ myManageHook = composeAll . concat $
    webApps       = ["chromium-browser"]
    ircApps       = ["XChat"]
    msgApps       = ["icedove"]
+
+------------------------------------------------------------------------
+-- workspaces
+
+determineWorkspaceName :: String -> Map.Map String String -> String
+determineWorkspaceName k map = case Map.lookup k map of
+    Nothing -> k
+    --Just v -> k ++ ":" ++ v
+    Just v -> v
+
+workspaceNumbers = map show [1..9]
+workspaceNameSuffixes = Map.fromList [
+    ("1", "web"),
+    ("5", "mail")
+    ]
+--myWorkspaces = map (\x -> determineWorkspaceName x workspaceNameSuffixes) workspaceNumbers
+--myWorkspaces = ["web"] ++ map show [2..9] ++ ["mail", "gimp", "im", "inkscape", "music", "office"]
+myWorkspaces = ["web"] ++ map show [2..4] ++ ["mail"] ++ map show [6..9] ++ ["♫"]
+
+--
+-- /workspaces
 
 main = do
     xmproc <- spawnPipe "xmobar"
