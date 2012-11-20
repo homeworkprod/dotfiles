@@ -75,13 +75,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = Map.fromList $ [
     --((modMask .|. mod1Mask, xK_t     ), spawn "/usr/bin/mpc toggle"),
     --((modMask .|. mod1Mask, xK_s     ), spawn "/usr/bin/mpc status"),
     --((modMask .|. mod1Mask, xK_Left  ), spawn "/usr/bin/mpc prev"),
-    --((modMask .|. mod1Mask, xK_Right ), spawn "/usr/bin/mpc next")
+    --((modMask .|. mod1Mask, xK_Right ), spawn "/usr/bin/mpc next"),
     --((modMask             , xK_Down  ), spawn "/usr/bin/mpc volume -2"),
-    --((modMask             , xK_Up    ), spawn "/usr/bin/mpc volume +2")
+    --((modMask             , xK_Up    ), spawn "/usr/bin/mpc volume +2"),
 
     -- Control ALSA mixer.
     --((modMask              , xK_Up    ), spawn "~/bin/set_amixer_volume.sh 2+ | ~/bin/display_volume_bar.sh"),  -- Increase volume.
-    --((modMask              , xK_Down  ), spawn "~/bin/set_amixer_volume.sh 2- | ~/bin/display_volume_bar.sh")  -- Decrease volume.
+    --((modMask              , xK_Down  ), spawn "~/bin/set_amixer_volume.sh 2- | ~/bin/display_volume_bar.sh"),  -- Decrease volume.
 
     ((modMask              , xK_q     ), restart "xmonad" True),     -- Restart xmonad.
     ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))  -- Quit xmonad.
