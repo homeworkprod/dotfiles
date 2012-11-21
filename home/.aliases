@@ -1,1 +1,4 @@
+alias fehf='feh -F --no-menus --sort filename $@'
 alias geh-aus='su -c halt'
+alias ll='ls -l'
+alias lla='ls -la'
