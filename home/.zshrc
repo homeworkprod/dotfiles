@@ -49,11 +49,15 @@ fi
 # colored manpages
 export PAGER='/usr/bin/most -s'
 
+# default printer
+export PRINTER="that_printer_name"
+
+export EDITOR=/usr/bin/gvim
+
 # set LANG
 export LANG="de_DE.UTF-8"
 
-##if [[ ("$(tty)" == "/dev/tty5") || ("$(tty)" == "/dev/tty6") ]]; then
-if [[ ("$(tty)" == "/dev/tty1") ]]; then
+if [ "$(tty)" = "/dev/tty1" ]; then
     setxkbmap de
     startx
 fi
