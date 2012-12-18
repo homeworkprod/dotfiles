@@ -79,7 +79,11 @@ map <A-Right> :bnext!<CR>
 
 set enc=utf-8
 
-setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+" Display certain whitespace characters (see `:help listchars` and `:dig`).
+" Toggle with `:set list!`.
+set listchars=eol:¶,tab:»·,trail:·,extends:»,precedes:«
+
+setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4
 set showmatch   " zugehörige Klammer anzeigen
 set smarttab
 set smartindent
