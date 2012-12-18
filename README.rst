@@ -1,8 +1,8 @@
 dotfiles
 ========
 
-- /etc
+``/etc``
   system-wide configuration files
 
-- /home
+``/home``
   personalized user configuration files and scripts
