@@ -20,7 +20,7 @@
 [diff]
 	tool = meld
 [difftool]
-    prompt = false
+	prompt = false
 [merge]
 	tool = meld
 [user]
