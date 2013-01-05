@@ -21,4 +21,4 @@ export OOO_FORCE_DESKTOP=gnome
 /usr/bin/unclutter -idle 1 -root &
 
 # Start window manager.
-exec xmonad
+xmonad
