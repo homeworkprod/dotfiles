@@ -3,6 +3,10 @@
 # Set X cursor to arrow.
 xsetroot -cursor_name left_ptr
 
+# Disable screen saver.
+xset s off
+xset -dpms
+
 # Enable Ctrl-Alt-Backspace to kill the X server.
 setxkbmap -option terminate:ctrl_alt_bksp
 
