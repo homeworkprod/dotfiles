@@ -21,6 +21,7 @@ import XMonad.Layout.ThreeColumns
 import qualified XMonad.StackSet as W
 import XMonad.Util.Run (safeSpawn, unsafeSpawn, spawnPipe)
 
+
 myBorderWidth = 1
 myFocusedBorderColor = "#cccc88"
 myNormalBorderColor  = "#666666"
@@ -79,9 +80,15 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = Map.fromList $ [
     --((modMask             , xK_Down  ), spawn "/usr/bin/mpc volume -2"),
     --((modMask             , xK_Up    ), spawn "/usr/bin/mpc volume +2"),
 
+    -- FIXME
     -- Control ALSA mixer.
     --((modMask              , xK_Up    ), spawn "~/bin/set_amixer_volume.sh 2+ | ~/bin/display_volume_bar.sh"),  -- Increase volume.
     --((modMask              , xK_Down  ), spawn "~/bin/set_amixer_volume.sh 2- | ~/bin/display_volume_bar.sh"),  -- Decrease volume.
+
+    -- Media keys
+    ((0,0x1008ff11                    ), unsafeSpawn "amixer -q set Master 2dB-"),
+    ((0,0x1008ff12                    ), unsafeSpawn "amixer -q set Master toggle"),
+    ((0,0x1008ff13                    ), unsafeSpawn "amixer -q set Master 2dB+"),
 
     ((modMask              , xK_q     ), restart "xmonad" True),     -- Restart xmonad.
     ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))  -- Quit xmonad.
@@ -128,20 +135,41 @@ myLogHook xmproc = dynamicLogWithPP $ xmobarPP {
 }
 
 myManageHook = composeAll . concat $
-    [ [ className =? c --> doFloat          | c <- myFloats]
-    , [ title     =? t --> doFloat          | t <- myOtherFloats]
-    , [ resource  =? "desktop_window" --> doIgnore]
-    , [ resource  =? "stalonetray"         --> doIgnore]
-    , [ className =? c --> doF (W.shift "web") | c <- webApps]
-    , [ className =? c --> doF (W.shift "irc") | c <- ircApps]
-    , [ className =? c --> doF (W.shift "msg") | c <- msgApps]
+    [
+        [className =? c --> doFloat              | c <- myFloatAppsByClassName],
+        [title     =? t --> doFloat              | t <- myFloatAppsByTitle],
+        [className =? c --> doF (W.shift "web" ) | c <- myWebApps],
+        [className =? c --> doF (W.shift "mail") | c <- myMailApps],
+        [className =? c --> doF (W.shift "9"   ) | c <- myWs9Apps],
+        [className =? c --> doF (W.shift "msg" ) | c <- msgApps]
     ]
- where
-   myFloats      = ["Gimp", "MPlayer", "Zenity"]
-   myOtherFloats = ["alsamixer", ".", "Firefox Preferences"]
-   webApps       = ["chromium-browser"]
-   ircApps       = ["XChat"]
-   msgApps       = ["icedove"]
+    where
+        myFloatAppsByClassName = [
+			"Gnome-appearance-properties",
+            "Lxappearance",
+            "MPlayer",
+            "mplayer2",
+            "sun-awt-X11-XFramePeer",  -- Java applet launched from IntelliJ IDEA
+            "Zenity"
+            ]
+        myFloatAppsByTitle = [
+			"Iceweasel-Einstellungen"
+            ]
+        myWebApps = [
+            "Iceweasel"
+            ]
+        myMailApps = [
+            "Icedove"
+            ]
+        myWs9Apps = [
+            "Chromium"
+            ]
+        ircApps = [
+            "XChat"
+            ]
+        msgApps = [
+            "icedove"
+            ]
 
 ------------------------------------------------------------------------
 -- workspaces
@@ -159,7 +187,7 @@ workspaceNameSuffixes = Map.fromList [
     ]
 --myWorkspaces = map (\x -> determineWorkspaceName x workspaceNameSuffixes) workspaceNumbers
 --myWorkspaces = ["web"] ++ map show [2..9] ++ ["mail", "gimp", "im", "inkscape", "music", "office"]
-myWorkspaces = ["web"] ++ map show [2..4] ++ ["mail"] ++ map show [6..9] ++ ["♫"]
+myWorkspaces = ["web"] ++ map show [2..4] ++ ["mail"] ++ map show [6..9] ++ ["gimp", "♫"]
 
 --
 -- /workspaces
@@ -188,7 +216,9 @@ defaults xmproc = withUrgencyHook NoUrgencyHook defaultConfig {
     -- hooks, layouts
     layoutHook = myLayoutHook,
     logHook = myLogHook xmproc,
-    manageHook = manageSpawn <+> manageDocks <+> myManageHook <+> manageHook defaultConfig,
+    -- FIXME: Including `manageSpawn` make shifting windows to other workspaces fail.
+    --manageHook = manageSpawn <+> manageDocks <+> myManageHook <+> manageHook defaultConfig,
+    manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig,
     startupHook = myStartupHook,
 
     -- misc

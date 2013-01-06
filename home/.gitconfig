@@ -8,6 +8,7 @@
 	dc = diff --cached
 	dct = difftool --cached
 	pr = pull --rebase
+	sp = stash pop
 	st = status
 	tree = log --graph --decorate --oneline --all
 [color]
