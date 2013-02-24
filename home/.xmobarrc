@@ -13,14 +13,14 @@ Config {
             "-L", "0",
             "-H", "32",
             "--normal", "green",
-            "--high"," red"
+            "--high","red"
             ] 10,
         Run Network "wlan0" [
             "-t", "<dev>:  <rx> KB/s up  <tx> KB/s down",
             "-L", "0",
             "-H", "32",
             "--normal", "green",
-            "--high"," red"
+            "--high","red"
             ] 10,
         Run Date "%A, %d. %B %Y (KW %W)" "date" 600,
         Run Date "%H:%M:%S Uhr" "time" 10,
