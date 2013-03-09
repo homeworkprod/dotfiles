@@ -21,11 +21,13 @@ development:
 - vim-scripts
 
 graphical desktop:
+- i3lock
 - lxappearance
 - lxrandr
 - rxvt-unicode-lite
 - suckless-tools
 - tangerine-icon-theme
+- unclutter
 - xmobar
 - xmonad
 - xserver-xorg
