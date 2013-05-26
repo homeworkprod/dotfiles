@@ -17,7 +17,7 @@
 	interactive = auto
 	status = auto
 [core]
-	editor = gvim
+	editor = gvim -f
 [diff]
 	tool = meld
 [difftool]
