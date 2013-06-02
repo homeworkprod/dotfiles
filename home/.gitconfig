@@ -7,6 +7,7 @@
 	dit = difftool
 	dc = diff --cached
 	dct = difftool --cached
+	fap = fetch --all --prune
 	pr = pull --rebase
 	sp = stash pop
 	st = status
