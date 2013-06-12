@@ -9,14 +9,14 @@ Config {
     	Run Memory ["-t", "Mem: <usedratio>%"] 10,
         Run Swap [] 10,
         Run Network "eth0" [
-            "-t", "<dev>:  <rx> KB/s up  <tx> KB/s down",
+            "-t", "<dev>:  <rx> KB/s down  <tx> KB/s up",
             "-L", "0",
             "-H", "32",
             "--normal", "green",
             "--high","red"
             ] 10,
         Run Network "wlan0" [
-            "-t", "<dev>:  <rx> KB/s up  <tx> KB/s down",
+            "-t", "<dev>:  <rx> KB/s down  <tx> KB/s up",
             "-L", "0",
             "-H", "32",
             "--normal", "green",
