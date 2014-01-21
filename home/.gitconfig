@@ -25,6 +25,8 @@
 	prompt = false
 [merge]
 	tool = meld
+[push]
+	default = simple
 [user]
 	name = Jochen Kupperschmidt
 	email = jk@local
