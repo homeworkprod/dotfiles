@@ -4,8 +4,10 @@
 	cm = commit -m
 	co = checkout
 	di = diff
+	diw = diff --color-words
 	dit = difftool
 	dc = diff --cached
+	dcw = diff --cached --color-words
 	dct = difftool --cached
 	fap = fetch --all --prune
 	pr = pull --rebase
