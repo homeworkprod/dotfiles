@@ -9,8 +9,9 @@ import XMonad.Actions.SpawnOn
 import XMonad.Hooks.DynamicLog (defaultPP, dynamicLogWithPP, ppCurrent,
   ppHidden, ppHiddenNoWindows, ppLayout, ppOutput, ppSep, ppTitle, ppUrgent,
   ppVisible, ppWsSep, shorten, wrap, xmobarColor, xmobarPP, xmobarStrip)
+import XMonad.Hooks.ICCCMFocus (takeTopFocus)
 import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.SetWMName
+import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.MultiToggle ((??), EOT (..), mkToggle, Toggle (..))
 import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL))
@@ -215,7 +216,7 @@ defaults xmproc = withUrgencyHook NoUrgencyHook defaultConfig {
 
     -- hooks, layouts
     layoutHook = myLayoutHook,
-    logHook = myLogHook xmproc,
+    logHook = takeTopFocus <+> myLogHook xmproc,
     -- FIXME: Including `manageSpawn` make shifting windows to other workspaces fail.
     --manageHook = manageSpawn <+> manageDocks <+> myManageHook <+> manageHook defaultConfig,
     manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig,
