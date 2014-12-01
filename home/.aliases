@@ -1,5 +1,7 @@
 alias ack='ack-grep'
+alias be='bundle exec'
 alias fehf='feh -F --no-menus --sort filename $@'
+alias ga='git-annex'
 alias geh-aus='su -c halt'
 alias ll='ls -l'
 alias lla='ls -la'
