@@ -1,7 +1,7 @@
-"3.4 (created: 2012/04/02 20:07:29)
+"3.8.3 (created: 2014/11/09 13:19:01)
 
 set complete=l
-set popups=window
-source! /home/users/kupperschmidt/.vimperatorrc.local
+set popups=tab
+source! /home/yogi/.vimperatorrc.local
 
 " vim: set ft=vimperator:
