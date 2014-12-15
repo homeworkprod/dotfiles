@@ -11,19 +11,23 @@ desktop applications:
 - xul-ext-noscript
 
 development:
-- ack-grep
+- silversearcher-ag
 - bpython
 - git
+- gitg
 - meld
+- tig
 - vim
 - vim-addon-manager
 - vim-gtk
 - vim-scripts
 
 graphical desktop:
+- dunst
 - i3lock
 - lxappearance
 - lxrandr
+- murrine-themes
 - rxvt-unicode-lite
 - suckless-tools
 - tangerine-icon-theme
@@ -51,11 +55,17 @@ multimedia:
   - feh
   - gimp
   - inkscape
+  - jpegoptim
+  - optipng
+  - pngcrush
 - video:
+  - dvdbackup
   - mplayer2
 
 network:
 - curl
+- filezilla
+- httpie
 - irssi
 - irssi-plugin-xmpp
 - irssi-scripts
@@ -79,11 +89,13 @@ office:
 shell:
 - most
 - screen
+- tmux
 - vfu
 - zsh
 
 sysadmin:
 - discus
+- gparted
 - htop
 - iotop
 - lsof
@@ -93,6 +105,10 @@ sysadmin:
 
 tools:
 - file
+- git-annex
+- jq
 - ntfs-3g
 - p7zip-full
 - pmount
+- ranger
+- vifm
