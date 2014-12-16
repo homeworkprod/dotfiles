@@ -2,6 +2,7 @@
 
 set complete=l
 set popups=tab
+set toolbars=noaddons,bookmarks,nomenu,nonavigation,tabs
 source! /home/yogi/.vimperatorrc.local
 
 " vim: set ft=vimperator:
