@@ -12,7 +12,7 @@
 	fap = fetch --all --prune
 	pr = pull --rebase
 	sp = stash pop
-	st = status
+	st = status -sb
 	tree = log --graph --decorate --oneline --all
 [color]
 	branch = auto
