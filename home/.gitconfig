@@ -3,6 +3,7 @@
 	ci = commit
 	cm = commit -m
 	co = checkout
+	cp = cherry-pick
 	di = diff
 	diw = diff --color-words
 	dit = difftool
