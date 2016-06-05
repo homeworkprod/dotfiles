@@ -24,5 +24,8 @@ export OOO_FORCE_DESKTOP=gnome
 # Hide inactive mouse cursor.
 /usr/bin/unclutter -idle 1 -root &
 
+# Have screen color temperature dynamically adjusted.
+redshift &
+
 # Start window manager.
 xmonad

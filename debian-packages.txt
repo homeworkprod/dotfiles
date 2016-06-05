@@ -28,6 +28,7 @@ graphical desktop:
 - lxappearance
 - lxrandr
 - murrine-themes
+- redshift
 - rxvt-unicode-lite
 - suckless-tools
 - tangerine-icon-theme
