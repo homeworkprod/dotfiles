@@ -35,6 +35,9 @@ graphical desktop:
 - x11-xserver-utils (contains: xset, xsetroot)
 - xmobar
 - xmonad
+  - ghc
+  - libghc-xmonad-dev
+  - libghc-xmonad-contrib-dev
 - xserver-xorg
 - zenity
 
