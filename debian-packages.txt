@@ -32,6 +32,7 @@ graphical desktop:
 - suckless-tools
 - tangerine-icon-theme
 - unclutter
+- x11-xserver-utils (contains: xset, xsetroot)
 - xmobar
 - xmonad
 - xserver-xorg
