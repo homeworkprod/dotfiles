@@ -1,3 +1,7 @@
+containerization:
+- docker-compose
+- docker.io
+
 desktop applications:
 - icedove
 - icedove-l10n-de
