@@ -15,8 +15,8 @@ export OOO_FORCE_DESKTOP=gnome
 
 ##gnome-settings-daemon &
 
-# Configure screens.
-##xrandr --output VGA-0 --right-of DVI-0
+# Activate preferred display (if connected).
+~/bin/activate_preferred_display.sh
 
 # Set random wallpaper.
 ~/bin/set_random_wallpaper.sh &
