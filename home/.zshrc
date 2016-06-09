@@ -45,6 +45,9 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
+# activate autojump
+. /usr/share/autojump/autojump.sh
+
 # colored manpages
 export PAGER='/usr/bin/most -s'
 
