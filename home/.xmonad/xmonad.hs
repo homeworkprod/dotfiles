@@ -82,11 +82,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = Map.fromList $ [
     --((modMask             , xK_Down  ), spawn "/usr/bin/mpc volume -2"),
     --((modMask             , xK_Up    ), spawn "/usr/bin/mpc volume +2"),
 
-    -- FIXME
-    -- Control ALSA mixer.
-    --((modMask              , xK_Up    ), spawn "~/bin/set_amixer_volume.sh 2+ | ~/bin/display_volume_bar.sh"),  -- Increase volume.
-    --((modMask              , xK_Down  ), spawn "~/bin/set_amixer_volume.sh 2- | ~/bin/display_volume_bar.sh"),  -- Decrease volume.
-
     -- Media keys
     ((0,0x1008ff11                    ), lowerVolume 3 >> return ()),
     ((0,0x1008ff12                    ), toggleMute >> return ()),
