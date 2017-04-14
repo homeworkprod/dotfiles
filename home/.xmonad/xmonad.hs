@@ -7,6 +7,8 @@ import XMonad.Actions.CycleWS (moveTo, Direction1D(Next), nextWS,
   WSType(NonEmptyWS), Direction1D(Prev), prevWS, shiftToNext, shiftToPrev)
 import XMonad.Actions.SpawnOn
 import XMonad.Actions.Volume (lowerVolume, raiseVolume, toggleMute)
+import Graphics.X11.ExtraTypes.XF86 (xF86XK_AudioMute, xF86XK_AudioLowerVolume,
+  xF86XK_AudioRaiseVolume)
 import XMonad.Hooks.DynamicLog (defaultPP, dynamicLogWithPP, ppCurrent,
   ppHidden, ppHiddenNoWindows, ppLayout, ppOutput, ppSep, ppTitle, ppUrgent,
   ppVisible, ppWsSep, shorten, wrap, xmobarColor, xmobarPP, xmobarStrip)
@@ -83,9 +85,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = Map.fromList $ [
     --((modMask             , xK_Up    ), spawn "/usr/bin/mpc volume +2"),
 
     -- Media keys
-    ((0,0x1008ff11                    ), lowerVolume 3 >> return ()),
-    ((0,0x1008ff12                    ), toggleMute >> return ()),
-    ((0,0x1008ff13                    ), raiseVolume 3 >> return ()),
+    ((0, xF86XK_AudioLowerVolume      ), lowerVolume 3 >> return ()),
+    ((0, xF86XK_AudioMute             ), toggleMute >> return ()),
+    ((0, xF86XK_AudioRaiseVolume      ), raiseVolume 3 >> return ()),
 
     ((modMask              , xK_q     ), restart "xmonad" True),     -- Restart xmonad.
     ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))  -- Quit xmonad.
