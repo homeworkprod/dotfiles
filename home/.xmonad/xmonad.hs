@@ -6,6 +6,7 @@ import XMonad
 import XMonad.Actions.CycleWS (moveTo, Direction1D(Next), nextWS,
   WSType(NonEmptyWS), Direction1D(Prev), prevWS, shiftToNext, shiftToPrev)
 import XMonad.Actions.SpawnOn
+import XMonad.Actions.Volume (lowerVolume, raiseVolume, toggleMute)
 import XMonad.Hooks.DynamicLog (defaultPP, dynamicLogWithPP, ppCurrent,
   ppHidden, ppHiddenNoWindows, ppLayout, ppOutput, ppSep, ppTitle, ppUrgent,
   ppVisible, ppWsSep, shorten, wrap, xmobarColor, xmobarPP, xmobarStrip)
@@ -87,9 +88,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = Map.fromList $ [
     --((modMask              , xK_Down  ), spawn "~/bin/set_amixer_volume.sh 2- | ~/bin/display_volume_bar.sh"),  -- Decrease volume.
 
     -- Media keys
-    ((0,0x1008ff11                    ), unsafeSpawn "amixer -q set Master 2dB-"),
-    ((0,0x1008ff12                    ), unsafeSpawn "amixer -q set Master toggle"),
-    ((0,0x1008ff13                    ), unsafeSpawn "amixer -q set Master 2dB+"),
+    ((0,0x1008ff11                    ), lowerVolume 3 >> return ()),
+    ((0,0x1008ff12                    ), toggleMute >> return ()),
+    ((0,0x1008ff13                    ), raiseVolume 3 >> return ()),
 
     ((modMask              , xK_q     ), restart "xmonad" True),     -- Restart xmonad.
     ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))  -- Quit xmonad.
