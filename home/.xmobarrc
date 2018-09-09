@@ -6,10 +6,11 @@ Config {
     position = Bottom,
     lowerOnStart = True,
     commands = [
-        Run Cpu [
-            "--Low", "3",
-            "--High", "50",
-            "--normal", "green",
+        Run MultiCpu [
+            "--template", "CPU: <autototal>",
+            "--ppad", "3",
+            "--Low", "0",
+            "--High", "75",
             "--high", "red"
             ] 10,
         Run Memory [
@@ -29,5 +30,5 @@ Config {
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = " %StdinReader%} { <fc=#666666>|</fc> %cpu% <fc=#666666>|</fc> %memory% <fc=#666666>|</fc> %swap% <fc=#666666>|</fc> %eth0% <fc=#666666>|</fc> %date% <fc=#666666>|</fc> %time% "
+    template = " %StdinReader%} { <fc=#666666>|</fc> %multicpu% <fc=#666666>|</fc> %memory% <fc=#666666>|</fc> %swap% <fc=#666666>|</fc> %eth0% <fc=#666666>|</fc> %date% <fc=#666666>|</fc> %time% "
 }
