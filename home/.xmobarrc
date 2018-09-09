@@ -5,13 +5,20 @@ Config {
     position = Bottom,
     lowerOnStart = True,
     commands = [
-        Run Cpu ["-L", "3", "-H", "50", "--normal", "green", "--high", "red"] 10,
-    	Run Memory ["-t", "Mem: <usedratio>%"] 10,
+        Run Cpu [
+            "--Low", "3",
+            "--High", "50",
+            "--normal", "green",
+            "--high", "red"
+            ] 10,
+        Run Memory [
+            "--template", "Mem: <usedratio>%"
+            ] 10,
         Run Swap [] 10,
         Run Network "eth0" [
-            "-t", "<dev>:  <rx> KB/s down  <tx> KB/s up",
-            "-L", "0",
-            "-H", "32",
+            "--template", "<dev>:  <rx> KB/s down  <tx> KB/s up",
+            "--Low", "0",
+            "--High", "32",
             "--normal", "green",
             "--high","red"
             ] 10,
