@@ -2,6 +2,7 @@ Config {
     font = "-misc-fixed-*-*-*-*-10-*-*-*-*-*-*-*",
     bgColor = "black",
     fgColor = "#cccccc",
+    alpha = 153,
     position = Bottom,
     lowerOnStart = True,
     commands = [
