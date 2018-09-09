@@ -7,7 +7,7 @@ Config {
     lowerOnStart = True,
     commands = [
         Run MultiCpu [
-            "--template", "CPU: <autototal>",
+            "--template", "<action=`rxvt -e htop`>CPU: <autototal></action>",
             "--ppad", "3",
             "--Low", "0",
             "--High", "75",
