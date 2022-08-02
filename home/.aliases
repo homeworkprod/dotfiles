@@ -1,8 +1,17 @@
-alias be='bundle exec'
+alias akku='acpi -b'
+alias bat='PAGER=less batcat'
+alias exa='exa --git --long'
+alias fd=fdfind
 alias fehf='feh -F --no-menus --sort filename $@'
 alias ga='git-annex'
-alias geh-aus='su -c poweroff'
+alias geh-aus='sudo poweroff'
 alias git='LANGUAGE=en_US git'
-alias ll='ls -lp'
-alias lla='ls -lpa'
+alias gv=gvim
+#alias ll='ls -lp'
+alias ll='exa --classify --group --long'
+#alias lla='ls -lpa'
+alias lla='exa --all --classify --group --long'
+alias nv=nvim
 alias ripcd='abcde -a cddb,read,encode,tag,move,replaygain,clean -o flac -x'
+alias sb='git cob'
+alias xg='xargs gvim'
