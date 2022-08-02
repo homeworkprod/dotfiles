@@ -1,13 +1,15 @@
 [alias]
-	br = branch
+	ap = add -p
+	br = !git --no-pager branch
 	ci = commit
 	cm = commit -m
 	co = checkout
+	cob = !git branch | grep -v '^\\*' | cut -b 3- | sort -r | sk --prompt 'branch to checkout> ' | xargs git checkout
 	cp = cherry-pick
-	di = diff
+	di = "!git diff --color $@ | diff-so-fancy"
 	diw = diff --color-words
 	dit = difftool
-	dc = diff --cached
+	dc = "!git diff --cached --color $@ | diff-so-fancy"
 	dcw = diff --cached --color-words
 	dct = difftool --cached
 	fap = fetch --all --prune
@@ -30,6 +32,8 @@
 	tool = meld
 [push]
 	default = simple
+[sequence]
+	editor = interactive-rebase-tool
 [user]
 	name = Jochen Kupperschmidt
 	email = jk@local
