@@ -10,22 +10,24 @@ xset -dpms
 # Enable Ctrl-Alt-Backspace to kill the X server.
 setxkbmap -option terminate:ctrl_alt_bksp
 
+# Override 'rxvt-unicode-256color' to avoid "terminal is not fully
+# functional" warnings.
+TERM=rxvt-unicode
+
 # Fix OpenOffice.org.
 export OOO_FORCE_DESKTOP=gnome
 
-##gnome-settings-daemon &
-
 # Activate preferred display (if connected).
-~/bin/activate_preferred_display.sh
+~/bin/activate-preferred-display.sh
 
 # Set random wallpaper.
 ~/bin/set_random_wallpaper.sh &
 
-# Hide inactive mouse cursor.
-/usr/bin/unclutter -idle 1 -root &
-
 # Have screen color temperature dynamically adjusted.
 redshift &
+
+# Hide inactive mouse cursor.
+/usr/bin/unclutter -idle 1 -root &
 
 # Start window manager.
 xmonad
