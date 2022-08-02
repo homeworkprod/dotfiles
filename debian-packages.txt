@@ -15,11 +15,10 @@ desktop applications:
 - xul-ext-noscript
 
 development:
-- silversearcher-ag
 - bpython
 - git
-- gitg
 - meld
+- ripgrep
 - tig
 - vim
 - vim-addon-manager
@@ -27,10 +26,10 @@ development:
 - vim-scripts
 
 graphical desktop:
+- arandr
 - dunst
 - i3lock (or: slock [from: suckless-tools])
 - lxappearance
-- lxrandr
 - murrine-themes
 - redshift
 - rxvt-unicode-lite
@@ -65,15 +64,13 @@ multimedia:
   - gimp
   - inkscape
   - jpegoptim
-  - optipng
-  - pngcrush
+  - pngquant
 - video:
   - dvdbackup
   - mplayer2
 
 network:
 - curl
-- filezilla
 - httpie
 - irssi
 - irssi-plugin-xmpp
@@ -110,10 +107,11 @@ sysadmin:
 - lsof
 - nmon
 - pwgen
-- sysv-rc-conf
 
 tools:
+- autojump/zoxide
 - file
+- fzf
 - git-annex
 - jq
 - ntfs-3g
