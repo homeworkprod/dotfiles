@@ -1,31 +1,23 @@
 set nocompatible
 
-call pathogen#infect()
-
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
+call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-gitgutter'
+"Plug 'altercation/vim-colors-solarized'
+"Plug 'chriskempson/base16-vim'
+Plug 'dense-analysis/ale'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'fholgado/minibufexpl.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/gv.vim'
+Plug 'lepture/vim-jinja'
+Plug 'morhetz/gruvbox'
+Plug 'NoahTheDuke/vim-just'
+Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-fugitive'
+call plug#end()
 
 set wildmenu
 set ruler           " Koordinatenanzeige in Statuszeile aktivieren
@@ -60,6 +52,7 @@ let Tlist_Enable_Fold_Column=0
 map <F8> :TlistToggle<CR>
 
 " File Browser
+let g:netrw_banner=0
 let g:netrw_list_hide='.*\.py[co]'
 let g:netrw_liststyle=1
 map <F9> :Explore<CR>
@@ -74,6 +67,8 @@ let g:miniBufExplModSelTarget = 1
 map <A-Left> :bprev!<CR>
 map <A-Right> :bnext!<CR>
 
+set clipboard=unnamedplus
+
 " Programmieren
 " -------------
 
@@ -86,21 +81,35 @@ set listchars=eol:¶,tab:»·,trail:·,extends:»,precedes:«
 setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4
 set showmatch   " zugehörige Klammer anzeigen
 set smarttab
-set smartindent
+"set smartindent
 set foldenable
+
+filetype plugin indent on
+syntax enable
 
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
+" Search
+" ------
+set incsearch
+set hlsearch
+
+" Clear search highlights on <esc>.
+nnoremap <esc> :noh<return><esc>
+
+map <c-p> :Files<CR>
+map <c-g> :Rg<CR>
+
+let g:lightline = { 'colorscheme': 'seoul256' }
+
 " colors
 syntax on
 "colorscheme darkblue
-colorscheme solarized
+"colorscheme solarized
+colorscheme gruvbox
 set background=dark
 
 " Disable cursor blinking.
 set gcr=a:blinkon0
-
-" Set local leader to ``,,`` (especially for Vim Outliner).
-let maplocalleader = ",,"  " (should be set in /etc/vim/vimoutlinerrc)
