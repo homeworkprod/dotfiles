@@ -40,9 +40,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = Map.fromList $ [
 
     -- Call external programs.
     ((modMask              , xK_e     ), safeSpawn "/usr/bin/pcmanfm" []),  -- Launch file manager.
-    ((modMask .|. shiftMask, xK_l     ), unsafeSpawn "zenity --question --text 'Bildschirm sperren?' && slock"),  -- Lock screen after asking.
+    ((modMask .|. shiftMask, xK_l     ), unsafeSpawn "zenity --question --text 'Bildschirm sperren?' && i3lock --image=/home/user/wallpapers/lockscreen.png"),  -- Lock screen after asking.
     ((modMask              , xK_p     ), spawnHere "exe=`dmenu_path | dmenu -b -nb \"#000000\" -nf \"#dddddd\" -sb \"#ff8800\" -sf \"#000000\"` && eval \"exec $exe\""),  -- Launch dmenu.
-    ((modMask              , xK_w     ), unsafeSpawn "~/bin/set_random_wallpaper.sh"),  -- Set random wallpaper.
+    ((modMask              , xK_w     ), unsafeSpawn "wpr ~/Wallpapers"),  -- Set random wallpaper.
     ((modMask              , xK_Return), spawn $ XMonad.terminal conf),  -- Launch terminal.
 
     -- Control layout.
@@ -85,9 +85,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = Map.fromList $ [
     --((modMask             , xK_Up    ), spawn "/usr/bin/mpc volume +2"),
 
     -- Media keys
-    ((0, xF86XK_AudioLowerVolume      ), lowerVolume 3 >> return ()),
+    ((0, xF86XK_AudioLowerVolume      ), lowerVolume 2 >> return ()),
     ((0, xF86XK_AudioMute             ), toggleMute >> return ()),
-    ((0, xF86XK_AudioRaiseVolume      ), raiseVolume 3 >> return ()),
+    ((0, xF86XK_AudioRaiseVolume      ), raiseVolume 2 >> return ()),
+
+    ((modMask              , xK_Down  ), lowerVolume 2 >> return ()),
+    ((modMask .|. shiftMask, xK_m     ), toggleMute >> return ()),
+    ((modMask              , xK_Up    ), raiseVolume 2 >> return ()),
 
     ((modMask              , xK_q     ), restart "xmonad" True),     -- Restart xmonad.
     ((modMask .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))  -- Quit xmonad.
@@ -139,35 +143,29 @@ myManageHook = composeAll . concat $
         [title     =? t --> doFloat              | t <- myFloatAppsByTitle],
         [className =? c --> doF (W.shift "web" ) | c <- myWebApps],
         [className =? c --> doF (W.shift "mail") | c <- myMailApps],
-        [className =? c --> doF (W.shift "9"   ) | c <- myWs9Apps],
-        [className =? c --> doF (W.shift "msg" ) | c <- msgApps]
+        [className =? c --> doF (W.shift "9"   ) | c <- myWs9Apps]
     ]
     where
         myFloatAppsByClassName = [
-			"Gnome-appearance-properties",
+            "hl2_linux",
             "Lxappearance",
             "MPlayer",
             "mplayer2",
             "sun-awt-X11-XFramePeer",  -- Java applet launched from IntelliJ IDEA
+            "Steam",
             "Zenity"
             ]
         myFloatAppsByTitle = [
-			"Iceweasel-Einstellungen"
             ]
         myWebApps = [
-            "Iceweasel"
+            "Firefox",
+            "Firefox-esr"
             ]
         myMailApps = [
             "Icedove"
             ]
         myWs9Apps = [
             "Chromium"
-            ]
-        ircApps = [
-            "XChat"
-            ]
-        msgApps = [
-            "icedove"
             ]
 
 ------------------------------------------------------------------------
@@ -193,7 +191,7 @@ myWorkspaces = ["web"] ++ map show [2..4] ++ ["mail"] ++ map show [6..9] ++ ["gi
 
 main = do
     xmproc <- spawnPipe "xmobar"
-    xmonad (defaults xmproc)
+    xmonad $ docks (defaults xmproc)
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will 
@@ -216,8 +214,8 @@ defaults xmproc = withUrgencyHook NoUrgencyHook defaultConfig {
     layoutHook = myLayoutHook,
     logHook = takeTopFocus <+> myLogHook xmproc,
     -- FIXME: Including `manageSpawn` make shifting windows to other workspaces fail.
-    --manageHook = manageSpawn <+> manageDocks <+> myManageHook <+> manageHook defaultConfig,
-    manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig,
+    --manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig,
+    manageHook = myManageHook <+> manageHook defaultConfig,
     startupHook = myStartupHook,
 
     -- misc
